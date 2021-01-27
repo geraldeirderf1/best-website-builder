@@ -1,0 +1,95 @@
+<% layout('layouts/boilerplate') %> 
+  <!-- <main id="front-page">
+
+    Separator
+    <section class="separator">
+      <div class="container">
+        <p><i class="fas fa-arrow-down"></i> We recommend</p>
+        <div>
+          <p>We receive referral fees</p>
+          <a href="#">Advertiser Disclosure</a>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Brand List -->
+    <section id="list">
+      <div class="container">
+        <div class="list-content">
+
+          <% for (let list of lists) { %>
+          <div class="row">
+            <div class="list-details">
+              <div class="brand">
+                <a href="#"><img src="<%= list.logo %> " alt="Wix logo"></a>
+              </div>
+              <div class="brand-info">
+                <ul>
+                  <li>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span> Please vote!</span>
+                  </li>
+                  <li>
+                    <i class="fas fa-cog"></i> <%= list.promo1 %> 
+                  </li>
+                  <li>
+                    <i class="fas fa-cog"></i> <%= list.promo2 %>
+                  </li>
+                  <li>
+                    <i class="fas fa-cog"></i> <%= list.promo3 %>
+                  </li>
+                </ul>
+              </div>
+              <div class="brand-rating">
+                <ul>
+                  <li><%= list.rating %></li>
+                  <li><%= list.remark %></li>
+                </ul>
+              </div>
+              <div>
+                <a class="btn" href="<%= list.link %>" target="_blank">Visit Site <i class="fas fa-angle-double-right"></i></a>
+              </div>
+            </div>
+            <div class="show-more">
+              <a href="#"><i class="fas fa-angle-down"></i></a>
+            </div>
+          </div>
+          <% } %>
+
+        </div>
+        <aside>
+          <a href="#"><img src="/images/sidebar-img.jpg" alt="Sidebar banner"></a>
+        </aside>
+      </div>
+    </section>
+
+    <section id="webpage-info">
+      <div class="container">
+        <div>
+          <h2>Helping you build a website</h2>
+          <p>Do you want to create a website, but don’t have coding experience? We provide thorough comparisons of the
+            most popular and successful website builders. Take a look at our analyses - we’ve pooled our experts’
+            knowledge to help you decide which website builder will meet your particular needs.</p>
+        </div>
+
+        <div>
+          <h2>Building your website</h2>
+          <p>You may not be a web designer or a professional coder - that’s where website builders come in. They
+            facilitate the process of creating a website, making it accessible to everyone, regardless of your
+            programming know-how. Using website builders’ streamlined and premade templates and themes, you can easily
+            launch a professional website.</p>
+        </div>
+
+        <div>
+          <h2>Choosing a website builder</h2>
+          <p>What kind of website do you want to create? A personal website might have a cleaner, simpler design, while
+            an online store requires a different set of strategies and resources. We are here to walk you through these
+            decisions and provide tips to help you make the best decision.</p>
+        </div>
+      </div>
+    </section>
+  </main>

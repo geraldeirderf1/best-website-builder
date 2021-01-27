@@ -1,0 +1,119 @@
+<% layout('layouts/boilerplate') %> 
+  <main>
+    <section id="manage">
+      <div class="container" id="parent">
+        <div class="jumbotron m-3">
+          <h1 class="display-4">Manage Lists</h1>
+          <p class="lead">View, Edit, Update Or Delete List</p>
+          <!-- <hr class="my-4">
+          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> -->
+          <a class="btn btn-primary btn-lg" href="/lists/new" role="button">Add New List <i class="fas fa-plus"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="list">
+      <div class="container review-page">
+        <div class="list-content" id="list-record">
+            <div class="row">
+                <div class="list-details">
+                  <div class="brand">
+                    <a href="#"><img src="<%= list.logo %>" alt="Wix logo"></a>
+                  </div>
+                  <div class="brand-info">
+                    <ul>
+                      <li>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span> Please vote!</span>
+                      </li>
+                      <li>
+                        <i class="fas fa-cog"></i>
+                        <%= list.promo1.substring(0, 28) %>..
+                      </li>
+                      <li>
+                        <i class="fas fa-cog"></i>
+                        <%= list.promo2.substring(0, 28) %>..
+                      </li>
+                      <li>
+                        <i class="fas fa-cog"></i>
+                        <%= list.promo3.substring(0, 28) %>..
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="brand-rating">
+                    <ul>
+                      <li>
+                        <%= list.rating %>
+                      </li>
+                      <li>
+                        <%= list.remark %>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <a class="btn" target="_blank" href="<%= list.link %>">Visit Site <i
+                        class="fas fa-angle-double-right"></i></a>
+                  </div>
+                  <% if (currentUser && list.author.equals(currentUser._id)) { %>
+                    <div id="edit-delete-btn">
+                        <a class="btn edit" href="/lists/<%= list._id %>/edit"> <i class="fas fa-edit"></i></a>
+                        <form action="/lists/<%= list._id %>?_method=DELETE" method="POST">
+                          <button type="submit" class="btn delete"> <i class="fas fa-trash-alt"></i></a>
+                        </form>
+                    </div>
+                  <% } %>
+                </div>
+                <div class="show-more">
+                  <a href="#"><i class="fas fa-angle-down"></i></a>
+                </div>
+              </div>
+        </div> 
+
+        <% if (currentUser) {%> 
+          <div class="review-form jumbotron">
+            <h2 class="my-2">Leave a Review</h2>
+            <form id="manage-form" action="/lists/<%= list._id %>/reviews" method="POST">
+              <div class="form-group">
+                <label for="rating">Rating:</label>
+                <input type="range" name="review[rating]" min="1" max="5" id="rating">
+              </div>
+              <div class="form-group">
+                <label for="body">Review:</label>
+                <textarea name="review[body]" id="body" cols="30" rows="3" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-block">Submit</button>
+            </form>
+          </div>
+        <% } %> 
+
+
+        <% for (let review of list.reviews) { %> 
+
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Rating: <%= review.rating %></h5>
+              <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username %> </h6>
+              <p class="card-text"><strong>Review:</strong> <%- review.body %></p>
+              <% if (currentUser && review.author.equals(currentUser._id)) { %>
+                <a href="#" class="btn edit">Edit <i class="fas fa-edit"></i></a>
+                <form action="/lists/<%= list._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                  <button type="submit" class="btn delete">Delete <i class="fas fa-trash-alt"></i></button>
+                </form>
+              <% } %> 
+            </div>
+          </div>
+
+          <!-- <div class="review-list">
+            <p>Rating: <%= review.rating %> </p>
+            <p>Review: <%- review.body %> </p>
+          </div> -->
+        <% } %>
+
+      </div>
+    </section>
+  </main>

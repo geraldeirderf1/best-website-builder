@@ -1,0 +1,55 @@
+<nav id="navbar">
+    <div class="container">
+        <div class="menu-wrap">
+            <input type="checkbox" class="toggler">
+            <div class="hamburger">
+                <div></div>
+            </div>
+            <a href="/" class="logo">
+                <img src="/images/the-best-10-website-builders-logo.svg" alt="Logo">
+            </a>
+            <div class="menu">
+                <div>
+                    <div>
+                        <ul>
+                            <li><a class="active" href="/">Home</a></li>
+                            <li><a href="/lists">Manage</a></li>
+                            <% if(!currentUser) { %> 
+                            <li><a href="/login">Login</i></a></li>
+                            <li><a href="/register">Signup</i></a></li>
+                            <% } else { %> 
+                            <li><a href="/logout">Logout</i></a></li>
+                            <% } %> 
+                            <!-- <li class="nested">Charts <i class="fas fa-angle-down"></i>
+                                <ul>
+                                    <li><a href="#">Best Website Builders 2020</a></li>
+                                </ul>
+                            </li>
+                            <li class="nested">Reviews <i class="fas fa-angle-down"></i>
+                                <ul>
+                                    <li><a href="#">Wix</a></li>
+                                    <li><a href="#">Network Solutions</a></li>
+                                    <li><a href="#">Squarespace</a></li>
+                                    <li><a href="#">Site123</a></li>
+                                    <li><a href="#">Web</a></li>
+                                    <li><a href="#">Wordpress.com</a></li>
+                                </ul>
+                            </li>
+                            <li class="nested">How To's <i class="fas fa-angle-down"></i>
+                                <ul>
+                                    <li><a href="#">How To Make Money With Your Website</a></li>
+                                    <li><a href="#">How To Boost Your Website Traffic Using Social Media</a>
+                                    </li>
+                                    <li><a href="#">How to Create the Best 404 Page Ever</a></li>
+                                    <li><a href="#">How To Reduce Your Cart Abandonment Rates</a></li>
+                                    <li><a href="#">How to Choose the Percect Template For Your Website?</a>
+                                    </li>
+                                </ul>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

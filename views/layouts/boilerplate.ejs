@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/menu.css">
+    <link rel="stylesheet" href="/stylesheets/mobile.css">
+    <title>The Best 10 Website Builders - The Best 10 Website Builders</title>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/navbar') %>
+
+            <% if (typeof page !==undefined && page==='index' ) { %>
+                <div id="showcase">
+                    <div class="container">
+                        <div class="showcase-content">
+                            <h1>Best Website Builders 2020</h1>
+                            <p>See the website builders and choose the one that's best for your needs. Compare pricing,
+                                features
+                                and more
+                                for the leading brands</p>
+                        </div>
+                    </div>
+                </div>
+
+                <main id="front-page">
+
+                    <!-- Separator -->
+                    <section class="separator">
+                      <div class="container">
+                        <p><i class="fas fa-arrow-down"></i> We recommend</p>
+                        <div>
+                          <p>We receive referral fees</p>
+                          <a href="#">Advertiser Disclosure</a>
+                        </div>
+                      </div>
+                    </section>
+                <% } %>
+
+    </header>
+    <%- include('../partials/flash') %> 
+    <%- body %>
+
+    <%- include('../partials/footer') %>
+
+    <script src="/javascripts/myscript.js"></script>
+</body>
+
+</html>

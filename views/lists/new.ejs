@@ -1,0 +1,45 @@
+<% layout('layouts/boilerplate') %> 
+  <main>
+    <section id="manage">
+      <div class="container" id="parent">
+
+        <div class="jumbotron m-3">
+          <h1 class="display-4">Add New List</h1>
+          <p class="lead">Please input all fields below</p>
+          <!-- <hr class="my-4">
+          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> -->
+          <a class="btn btn-primary btn-lg" href="/lists" role="button">Go Back <i class="fas fa-angle-double-left"></i></a>
+        </div>
+
+        <!-- <h1 class="text-center">CREATE NEW LISTING</h1> -->
+        <form id="manage-form" action="/lists" method="POST" class="my-3">
+          <div class="form-group">
+            <label for="logo">Logo:</label>
+            <input required type="text" id="logo" name="list[logo]">
+          </div>
+          <div class="form-group">
+            <label>Promo's: </label>
+            <input required type="text" id="promo1" name="list[promo1]" placeholder="Promo One">
+            <input required type="text" id="promo2" name="list[promo2]" placeholder="Promo Two">
+            <input required type="text" id="promo3" name="list[promo3]" placeholder="Promo Three">
+          </div>
+
+          <div class="form-group">
+            <label for="rating">Rating:</label>
+            <input required type="number" step="0.01" max="10" id="rating" name="list[rating]" placeholder="0.0">
+            <select id="remark" name="list[remark]" required>
+              <option value="Outstanding">Outstanding</option>
+              <option value="Excellent">Excellent</option>
+              <option value="Very good">Very good</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="link">Link:</label>
+            <input required type="text" id="link" name="list[link]">
+          </div>
+          <button type="submit" class="btn btn-block">Submit</button>
+        </form> 
+      </div>
+    </section>
+
+  </main>

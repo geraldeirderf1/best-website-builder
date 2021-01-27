@@ -1,0 +1,97 @@
+/* Mobile */
+@media(max-width: 768px){
+  #showcase {
+    margin-top: 60px;
+  }
+
+  /* Separator */
+  .separator .container div {
+    display: none;
+  }
+
+  .separator .container {
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* aside */
+  #list .container aside {
+    display: none;
+  }
+
+  #list .container {
+    justify-content: center;
+  }
+
+  #list .container .list-content{
+    padding: 0;
+    width: auto;
+  }
+
+  #list .container .list-content .row {
+    margin-bottom: 20px;
+  }
+
+  #list .container .list-content .row .list-details > div {
+    padding: 12px 0;
+  }
+
+  #webpage-info {
+    text-align: center;
+  }
+
+  #webpage-info p {
+    max-width: 100%;
+  }
+
+  /* footer */
+  footer .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  footer .col-1, footer .col-2 {
+    width: 100%;
+  }
+
+  footer .col-2 {
+    align-items: center;
+  }
+
+  #copyright {
+    text-align: center;
+  }
+
+  #copyright .container > div {
+    margin-bottom: 15px;
+  }
+
+  #list .container .list-content .row .list-details,
+  #copyright .col-2 ul,
+  #copyright .container,
+  footer .col-2 ul {
+    flex-direction: column;
+  }
+
+  #copyright .col-2 ul li {
+    padding: 10px;
+  }
+
+  /* Manage page */
+  #manage {
+    margin-top: 60px;
+  }
+
+  /* ALERT */
+  .alert {
+    top: 5rem;
+  }
+
+  /* Login & Registration Form */
+  .login-page {
+    margin-top: 4rem;
+    width: auto;
+    padding: 8% 0 0;
+  }
+  
+}
