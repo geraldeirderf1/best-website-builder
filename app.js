@@ -20,7 +20,7 @@ const express = require('express'),
     {listSchema, reviewSchema} = require('./schemas'),
     ExpressError = require('./utils/ExpressError'),
     MongoDBStore = require('connect-mongo')(session);
-    port = 3000;
+    port = process.env.PORT || 3000;
 
 
 // ==============
