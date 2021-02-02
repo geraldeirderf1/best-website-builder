@@ -19,6 +19,7 @@ const express = require('express'),
     Review = require('./models/review'),
     {listSchema, reviewSchema} = require('./schemas'),
     ExpressError = require('./utils/ExpressError'),
+    MongoDBStore = require('connect-mongo')(session);
     port = 3000;
 
 
@@ -29,8 +30,7 @@ const listRoutes = require('./routes/lists');
 const userRoutes = require('./routes/users');
 const reviewRoutes = require('./routes/reviews');
 
-const dbUrl = process.env.DB_URL;
-// mongodb://localhost:27017/best-website-builder
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/best-website-builder';
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -53,8 +53,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(expressSanitizer());
 app.use(methodOverride('_method'));
 
+const secret = process.env.SECRET || 'secret';
+
+const store = new MongoDBStore({
+    url: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+});
+
+store.on('error', function (e) {
+    console.log('SESSION STORE ERROR', e);
+});
+
 const sessionConfig = {
-    secret: 'secret',
+    store,
+    name: 'session',
+    secret,
     resave: false,
     saveUninitialized: false,
     cookie: {
