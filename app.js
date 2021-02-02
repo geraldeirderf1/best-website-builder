@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 const express = require('express'),
     app = express(),
     path = require('path'),
@@ -25,8 +29,9 @@ const listRoutes = require('./routes/lists');
 const userRoutes = require('./routes/users');
 const reviewRoutes = require('./routes/reviews');
 
-
-mongoose.connect('mongodb://localhost:27017/best-website-builder', {
+const dbUrl = process.env.DB_URL;
+// mongodb://localhost:27017/best-website-builder
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -88,8 +93,15 @@ app.use('/', userRoutes);
 
 // HOMEPAGE
 app.get('/', catchAsync(async (req, res, next) => {
-    const lists = await List.find({});
-    res.render('index', { lists, page: 'index' });
+    if (req.query.promo1) {
+        const regex = new RegExp(escapeRegex(req.query.promo1), 'gi');
+        // const regex = new RegExp(escapeRegex(req.query.rating), 'gi');
+        const lists = await List.find({promo1: regex});
+        res.render('index', { lists, page: 'index' });
+    } else {
+        const lists = await List.find({});
+        res.render('index', { lists, page: 'index' });
+    }
 }));
 
 app.all('*', (req, res, next) => {
@@ -105,6 +117,11 @@ app.use((err, req, res, next) => {
     }
     res.status(statusCode).render('error', { err });
 });
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+    // return rating.replace(/(^[0-9][0-9])\.?([0-9][0-9])?$/g, `${rating}`);
+};
 
 
 app.listen(port, () => console.log(`Sever started on port ${port}`));

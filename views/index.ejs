@@ -21,7 +21,13 @@
           <div class="row">
             <div class="list-details">
               <div class="brand">
-                <a href="#"><img src="<%= list.logo %> " alt="Wix logo"></a>
+                <a href="#"><img src="<% if (typeof list.logo[0] !== 'undefined') { %>
+                  <%= list.logo[0].url %>
+                  <% } else { %>
+                    
+                  <%= '' %>
+
+                  <% } %>" alt="Wix logo"></a>
               </div>
               <div class="brand-info">
                 <ul>
@@ -34,13 +40,13 @@
                     <span> Please vote!</span>
                   </li>
                   <li>
-                    <i class="fas fa-cog"></i> <%= list.promo1 %> 
+                    <i class="fas fa-cog"></i> <%= list.promo1.substring(0, 28) %>..
                   </li>
                   <li>
-                    <i class="fas fa-cog"></i> <%= list.promo2 %>
+                    <i class="fas fa-cog"></i> <%= list.promo2.substring(0, 28) %>..
                   </li>
                   <li>
-                    <i class="fas fa-cog"></i> <%= list.promo3 %>
+                    <i class="fas fa-cog"></i> <%= list.promo3.substring(0, 28) %>..
                   </li>
                 </ul>
               </div>

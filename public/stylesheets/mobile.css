@@ -45,7 +45,7 @@
   }
 
   /* footer */
-  footer .container {
+  footer .first-row .container {
     flex-direction: column;
     text-align: center;
   }
@@ -93,5 +93,12 @@
     width: auto;
     padding: 8% 0 0;
   }
+
+  /* homepage form */
+  #manage-form.homepage-search input,
+  #manage-form.homepage-search select {
+    width: 100%;
+  }
   
 }
+

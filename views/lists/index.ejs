@@ -1,4 +1,4 @@
-<% layout('layouts/boilerplate') %> 
+<% layout('layouts/boilerplate') %>
   <main>
     <section id="manage">
       <div class="container" id="parent">
@@ -6,35 +6,22 @@
         <div class="jumbotron m-3">
           <h1 class="display-4">Manage Lists</h1>
           <p class="lead">View, Edit, Update Or Delete List</p>
-          <!-- <hr class="my-4">
-          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> -->
           <a class="btn btn-primary btn-lg" href="/lists/new" role="button">Add New List <i class="fas fa-plus"></i></a>
-        </div>
 
-        <!-- <h1 class="text-center">CREATE NEW LISTING</h1>
-        <form id="manage-form">
-          <div class="form-group">
-            <label for="logo">Logo:</label>
-            <input type="file" id="logo" accept="image/png, image/jpeg">
-          </div>
-          <div class="form-group">
-            <label>Promo's: </label>
-            <input type="text" id="promo1" placeholder="Promo One">
-            <input type="text" id="promo2" placeholder="Promo Two">
-            <input type="text" id="promo3" placeholder="Promo Three">
-          </div>
-
-          <div class="form-group">
-            <label for="rating">Rating:</label>
-            <input type="number" step="0.01" max="10" id="rating" placeholder="0.0">
-            <select id="remark">
+          <form action="/lists" method="GET" id="manage-form" class="homepage-search my-3">
+            <input class="form-control" name="list[promo1]" type="text" placeholder="Promo One" aria-label="default input example">
+            <input class="form-control" name="list[promo2]" type="text" placeholder="Promo Two" aria-label="default input example">
+            <input class="form-control" name="list[promo3]" type="text" placeholder="Promo Three" aria-label="default input example">
+            <select id="remark" name="list[remark]" required>
               <option value="Outstanding">Outstanding</option>
               <option value="Excellent">Excellent</option>
               <option value="Very good">Very good</option>
             </select>
-          </div>
-          <button type="submit" class="btn btn-block">Submit</button>
-        </form> -->
+            <input class="form-control" type="number" step="0.01" max="10" id="rating" name="list[rating]" placeholder="0.0">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a class="btn" href="/lists">View All List</a>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -46,7 +33,12 @@
             <div class="row">
               <div class="list-details">
                 <div class="brand">
-                  <a href="#"><img src="<%= list.logo %>" alt="Wix logo"></a>
+                  <a href="#"><img src="<% if (typeof list.logo[0] !== 'undefined') { %>
+                    <%= list.logo[0].url %>
+                    <% } else { %>
+                      
+                    <%= '' %>
+                    <% } %>" alt="Wix logo"></a>
                 </div>
                 <div class="brand-info">
                   <ul>
@@ -86,17 +78,18 @@
                   <a class="btn" target="_blank" href="<%= list.link %>">Visit Site <i
                       class="fas fa-angle-double-right"></i></a>
                 </div>
-                
-                  <div id="edit-delete-btn">
-                    <a class="btn edit" href="/lists/<%= list._id %>"> <i class="fas fa-angle-double-right"></i></a>
-                    <% if (currentUser && list.author.equals(currentUser._id)) { %>
+
+                <div id="edit-delete-btn">
+                  <a class="btn edit" href="/lists/<%= list._id %>"> <i class="fas fa-angle-double-right"></i></a>
+                  <% if (currentUser && list.author.equals(currentUser._id)) { %>
                     <a class="btn edit" href="/lists/<%= list._id %>/edit"> <i class="fas fa-edit"></i></a>
                     <form action="/lists/<%= list._id %>?_method=DELETE" method="POST">
+                      <input type="hidden" name="deleteImage[]" value="<%if(typeof list.logo[0] !== 'undefined'){ %><%=list.logo[0].filename%><% }else{ %> <%=''%> <% }%>">
                       <button type="submit" class="btn delete"> <i class="fas fa-trash-alt"></i></button>
                     </form>
                     <% } %>
-                  </div>
-                
+                </div>
+
               </div>
               <div class="show-more">
                 <a href="#"><i class="fas fa-angle-down"></i></a>

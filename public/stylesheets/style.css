@@ -14,10 +14,16 @@
 /* Main Styling */
 html,
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-family: 'Roboto', sans-serif;
   background: #f7f7f7;
   color: #333;
+  height: 100vh;
   line-height: 1.4;
+  margin: 0;
+  padding: 0;
 }
 
 ul {
@@ -126,6 +132,7 @@ img {
   margin-bottom: 1.5rem!important;
 }
 .m-3 {margin: 1rem 0;}
+.mb-3 { margin-bottom: 16px }
 
 .jumbotron {
   padding: 2rem 1rem;
@@ -143,6 +150,47 @@ img {
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
+}
+
+.img-thumbnail {
+  /* width: 200px; */
+  width: auto;
+  padding: 4px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  display: inline-block;
+  /* max-width: 100%; */
+  height: auto;
+}
+
+img {
+  vertical-align: middle;
+}
+
+#manage-form .form-check-input {
+  width: auto;
+}
+
+.list-group {
+  /* display: flex; */
+  /* flex-direction: column; */
+  padding-left: 0;
+  border-radius: .25rem;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: .5rem 1rem;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border: none;
 }
 
 /* Navbar */
@@ -430,13 +478,14 @@ img {
 /* Footer */
 footer {
   background: #6d6e70;
-  padding: 1.4rem;
+  /* padding: 1.4rem; */
   font-size: 0.8rem;
   color: #fff;
   font-weight: 300;
 }
 
-footer .container {
+footer .first-row .container {
+  padding: 1.4rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -493,11 +542,11 @@ footer .col-2 ul li a:hover {
   margin: 0;
 }
 
-#copyright .col-2 ul {
+#copyright .col-2-copyright ul {
   display: flex;
 }
 
-#copyright .col-2 ul li a {
+#copyright .col-2-copyright ul li a {
   font-size: 0.9rem;
   display: block;
   padding: 0 0.5rem;
@@ -539,6 +588,15 @@ footer .col-2 ul li a:hover {
 #manage-form select:focus {
   outline: none;
   border-color: #009bfb;
+}
+
+#manage-form.homepage-search input, 
+#manage-form.homepage-search select {
+  width: 49%;
+}
+
+#manage-form.homepage-search #rating {
+  display: block;
 }
 
 #list #list-record {
@@ -731,4 +789,9 @@ p {
 .card-subtitle {
   margin-top: -.25rem;
   margin-bottom: 0;
+}
+
+/* Flash */
+#flash-message {
+  width: 100%;
 }

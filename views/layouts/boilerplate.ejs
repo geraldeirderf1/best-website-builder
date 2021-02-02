@@ -7,6 +7,12 @@
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <% if (typeof page !== undefined && page === 'show' ) { %>
+        <link rel="stylesheet" href="/stylesheets/stars.css">
+    <% } %> 
+    <% if (typeof page !== undefined && page === 'editReview' ) { %>
+      <link rel="stylesheet" href="/stylesheets/stars.css">
+    <% } %>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/menu.css">
     <link rel="stylesheet" href="/stylesheets/mobile.css">
@@ -25,7 +31,8 @@
                             <p>See the website builders and choose the one that's best for your needs. Compare pricing,
                                 features
                                 and more
-                                for the leading brands</p>
+                                for the leading brands
+                            </p>
                         </div>
                     </div>
                 </div>

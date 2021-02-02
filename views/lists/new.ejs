@@ -12,11 +12,17 @@
         </div>
 
         <!-- <h1 class="text-center">CREATE NEW LISTING</h1> -->
-        <form id="manage-form" action="/lists" method="POST" class="my-3">
-          <div class="form-group">
+        <form id="manage-form" action="/lists" method="POST" class="my-3" enctype="multipart/form-data">
+          <!-- <div class="form-group">
             <label for="logo">Logo:</label>
             <input required type="text" id="logo" name="list[logo]">
+          </div> -->
+
+          <div class="form-group">
+            <label for="formFile" class="form-label">Logo:</label>
+            <input class="form-control" type="file" id="formFile" name="list[logo]" accept="image/*" required multiple>
           </div>
+
           <div class="form-group">
             <label>Promo's: </label>
             <input required type="text" id="promo1" name="list[promo1]" placeholder="Promo One">

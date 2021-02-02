@@ -3,11 +3,11 @@
     <section id="manage">
       <div class="container" id="parent">
         <div class="jumbotron m-3">
-          <h1 class="display-4">Manage Lists</h1>
-          <p class="lead">View, Edit, Update Or Delete List</p>
+          <h1 class="display-4">Edit Review</h1>
+          <p class="lead">Edit your review below</p>
           <!-- <hr class="my-4">
           <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> -->
-          <a class="btn btn-primary btn-lg" href="/lists/new" role="button">Add New List <i class="fas fa-plus"></i></a>
+          <a class="btn btn-primary btn-lg" href="/lists/<%= list._id %>" role="button">Cancel <i class="fas fa-angle-double-left"></i></a>
         </div>
       </div>
     </section>
@@ -66,7 +66,6 @@
                     <div id="edit-delete-btn">
                         <a class="btn edit" href="/lists/<%= list._id %>/edit"> <i class="fas fa-edit"></i></a>
                         <form action="/lists/<%= list._id %>?_method=DELETE" method="POST">
-                          <input type="hidden" name="deleteImage[]" value="<%if(typeof list.logo[0] !== 'undefined'){ %><%=list.logo[0].filename%><% }else{ %> <%=''%> <% }%>">
                           <button type="submit" class="btn delete"> <i class="fas fa-trash-alt"></i></a>
                         </form>
                     </div>
@@ -79,9 +78,9 @@
         </div> 
 
         <% if (currentUser) {%> 
-          <div class="review-form jumbotron">
-            <h2 class="my-2">Leave a Review</h2>
-            <form id="manage-form" action="/lists/<%= list._id %>/reviews" method="POST">
+          <div class="review-form jumbotron" id="edit-review">
+            <h2 class="my-2">Edit Review</h2>
+            <form id="manage-form" action="/lists/<%= list._id %>/reviews/<%= review._id %>?_method=PUT" method="POST">
               <!-- <div class="form-group">
                 <label for="rating">Rating:</label>
                 <input type="range" name="review[rating]" min="1" max="5" id="rating">
@@ -89,7 +88,7 @@
               <div class="my-1">
                 <fieldset class="starability-basic">
                   <legend class="mb-2">Rating:</legend>
-                  <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                  <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="<%= review.rating %> " checked aria-label="No rating." />
                   <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                   <label for="first-rate1" title="Terrible">1 star</label>
                   <input type="radio" id="first-rate2" name="review[rating]" value="2" />
@@ -105,7 +104,7 @@
 
               <div class="form-group">
                 <label for="body">Review:</label>
-                <textarea name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                <textarea name="review[body]" id="body" cols="30" rows="3" required><%= review.body %></textarea>
               </div>
               <button type="submit" class="btn btn-block">Submit</button>
             </form>
@@ -113,18 +112,17 @@
         <% } %> 
 
 
-        <% for (let review of list.reviews) { %> 
+        <% for (let reviews of list.reviews) { %> 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><%= review.author.username %></h5>
-              <!-- <h3>Rated element name</h3> -->
-              <p class="starability-result" data-rating="<%= review.rating %>">
-                Rated: <%= review.rating %> stars
+              <h5 class="card-title"><%= reviews.author.username %></h5>
+              <p class="starability-result" data-rating="<%= reviews.rating %>">
+                Rated: <%= reviews.rating %> stars
               </p>
-              <p class="card-text"><strong>Review:</strong> <%- review.body %></p>
-              <% if (currentUser && review.author.equals(currentUser._id)) { %>
-                <a href="/lists/<%= list._id %>/reviews/<%= review._id %>/edit" class="btn edit">Edit <i class="fas fa-edit"></i></a>
-                <form action="/lists/<%= list._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+              <p class="card-text"><strong>Review:</strong> <%- reviews.body %></p>
+              <% if (currentUser && reviews.author.equals(currentUser._id)) { %>
+                <a href="#" class="btn edit">Edit <i class="fas fa-edit"></i></a>
+                <form action="/lists/<%= list._id %>/reviews/<%= reviews._id %>?_method=DELETE" method="POST">
                   <button type="submit" class="btn delete">Delete <i class="fas fa-trash-alt"></i></button>
                 </form>
               <% } %> 
