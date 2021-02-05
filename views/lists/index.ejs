@@ -51,48 +51,50 @@
       <div class="container list-index">
 
         <!-- PAGINATION SHOW OPTION -->
-        <% if (pages > 1) { %>
-          <ul class="pagination text-center">
-            <div class="show-input-group">
-              <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-              <% if (query.perPage && query.list) { %> 
-                <form id="show-pagination-form" action="/lists?perPage<%= limit %>" method="GET">
-                  <select class="form-select" name="perPage" id="limit" aria-label="Example select with button addon"> 
-                    <option value="" selected>Show...</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                  </select>
-                  <input type="hidden" name="list[promo1]" value="<% if (query.list.promo1) { %><%= query.list.promo1 %><% } else { %><%= '' %><% } %>">
-                  <input type="hidden" name="list[promo2]" value="<% if (query.list.promo2) { %><%= query.list.promo2 %><% } else { %><%= '' %><% } %>">
-                  <input type="hidden" name="list[promo3]" value="<% if (query.list.promo3) { %><%= query.list.promo3 %><% } else { %><%= '' %><% } %>">
-                  <input type="hidden" name="list[remark]" value="<% if (query.list.remark) { %><%= query.list.remark %><% } else { %><%= '' %><% } %>">
-                  <input type="hidden" name="list[rating]" value="<% if (query.list.rating) { %><%= query.list.rating %><% } else { %><%= '' %><% } %>">
-                  <button type="submit" class="show-btn btn-outline-secondary">OK</button>
-                </form>
-              <% } else if (query.perPage) { %>
-                <form id="show-pagination-form" action="/lists?perPage<%= limit %>" method="GET">
-                  <select class="form-select" name="perPage" id="limit" aria-label="Example select with button addon"> 
-                    <option value="<%= limit %>" selected>Show...</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                  </select>
-                  <button type="submit" class="show-btn btn-outline-secondary">OK</button>
-                </form>
-              <% } else { %> 
-                <form id="show-pagination-form" action="/lists" method="GET">
-                  <select class="form-select" name="perPage" id="limit" aria-label="Example select with button addon">
-                    <option value="<%= limit %> " selected>Show...</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                  </select>
-                  <button type="submit" class="show-btn btn-outline-secondary">OK</button>
-                </form>
-              <% } %> 
-            </div>
-          </ul>
+        <% if (count > 5) { %> 
+          <% if (pages > 0) { %>
+            <ul class="pagination text-center">
+              <div class="show-input-group">
+                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                <% if (query.perPage && query.list) { %> 
+                  <form id="show-pagination-form" action="/lists?perPage<%= limit %>" method="GET">
+                    <select class="form-select" name="perPage" id="limit" aria-label="Example select with button addon"> 
+                      <option value="" selected>Show...</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                    <input type="hidden" name="list[promo1]" value="<% if (query.list.promo1) { %><%= query.list.promo1 %><% } else { %><%= '' %><% } %>">
+                    <input type="hidden" name="list[promo2]" value="<% if (query.list.promo2) { %><%= query.list.promo2 %><% } else { %><%= '' %><% } %>">
+                    <input type="hidden" name="list[promo3]" value="<% if (query.list.promo3) { %><%= query.list.promo3 %><% } else { %><%= '' %><% } %>">
+                    <input type="hidden" name="list[remark]" value="<% if (query.list.remark) { %><%= query.list.remark %><% } else { %><%= '' %><% } %>">
+                    <input type="hidden" name="list[rating]" value="<% if (query.list.rating) { %><%= query.list.rating %><% } else { %><%= '' %><% } %>">
+                    <button type="submit" class="show-btn btn-outline-secondary">OK</button>
+                  </form>
+                <% } else if (query.perPage) { %>
+                  <form id="show-pagination-form" action="/lists?perPage<%= limit %>" method="GET">
+                    <select class="form-select" name="perPage" id="limit" aria-label="Example select with button addon"> 
+                      <option value="<%= limit %>" selected>Show...</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                    <button type="submit" class="show-btn btn-outline-secondary">OK</button>
+                  </form>
+                <% } else { %> 
+                  <form id="show-pagination-form" action="/lists" method="GET">
+                    <select class="form-select" name="perPage" id="limit" aria-label="Example select with button addon">
+                      <option value="<%= limit %> " selected>Show...</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                    <button type="submit" class="show-btn btn-outline-secondary">OK</button>
+                  </form>
+                <% } %> 
+              </div>
+            </ul>
+          <% } %> 
         <% } %> 
         <!-- END OF PAGINATION SHOW OPTION -->
 
@@ -169,52 +171,54 @@
         </div>
 
         <!-- PAGINATION -->
-        <% if (pages > 1) { %>
-          <ul class="pagination text-center">
-              <% if (current == 1) { %>
-                  <li class="disabled page-item"><a class="page-link">First</a></li>
-              <% } else { %>
-                  <% if (query.list !== undefined) { %> 
-                    <li class="page-item"><a class="page-link" href="/lists?perPage=<%= limit %>&page=1&list%5Bpromo1%5D=<%= query.list.promo1 %>&list%5Bpromo2%5D=<%= query.list.promo2 %>&list%5Bpromo3%5D=<%= query.list.promo3 %>&list%5Bremark%5D=<%= query.list.remark %>&list%5Brating%5D=<%= query.list.rating %>">First</a></li>
-                  <% } else { %> 
-                    <li class="page-item"><a class="page-link" href="/lists?page=1&perPage=<%= limit %>">First</a></li>
-                  <% } %> 
-              <% } %>
-              <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-              <% if (i !== 1) { %>
-                  <li class="disabled page-item"><a class="page-link">...</a></li>
-              <% } %>
-              <% for (i; i <= (Number(current) + 4) && i <= pages; i++) { %>
-                  <% if (i == current) { %>
-                      <li class="page-item active"><a class="page-link"><%= i %></a></li>
+        <% if (count > 5) { %> 
+            <% if (pages > 0) { %>
+              <ul class="pagination text-center">
+                  <% if (current == 1) { %>
+                      <li class="disabled page-item"><a class="page-link">First</a></li>
                   <% } else { %>
-                    <% if (query.list !== undefined) {  %> 
-                      <% if ((query.list.rating === '') && (query.list.promo1 === '' && query.list.promo2 === '' && query.list.promo3 === '' && query.list.remark === '')) { %>
-                        <li class="page-item"><a href="/lists?page=<%= i %>" class="page-link"><%= i %> </a></li>
-                      <% } else if ((query.list.rating === '') && (query.list.promo1 !== '' || query.list.promo2 !== '' || query.list.promo3 !== '' || query.list.remark !== '')) { %> 
-                        <li class="page-item"><a class="page-link" href="/lists?page=<%= i %>&list%5Bpromo1%5D=<%= query.list.promo1 %>&list%5Bpromo2%5D=<%= query.list.promo2 %>&list%5Bpromo3%5D=<%= query.list.promo3 %>&list%5Bremark%5D=<%= query.list.remark %>&list%5Brating%5D=<%= query.list.rating %>"><%= i %></a></li>
+                      <% if (query.list !== undefined) { %> 
+                        <li class="page-item"><a class="page-link" href="/lists?perPage=<%= limit %>&page=1&list%5Bpromo1%5D=<%= query.list.promo1 %>&list%5Bpromo2%5D=<%= query.list.promo2 %>&list%5Bpromo3%5D=<%= query.list.promo3 %>&list%5Bremark%5D=<%= query.list.remark %>&list%5Brating%5D=<%= query.list.rating %>">First</a></li>
                       <% } else { %> 
-                        <li class="page-item"><a class="page-link" href="/lists?page=<%= i %>&list%5Bpromo1%5D=<%= query.list.promo1 %>&list%5Bpromo2%5D=<%= query.list.promo2 %>&list%5Bpromo3%5D=<%= query.list.promo3 %>&list%5Bremark%5D=<%= query.list.remark %>&list%5Brating%5D=<%= query.list.rating %>"><%= i %></a></li>
+                        <li class="page-item"><a class="page-link" href="/lists?page=1&perPage=<%= limit %>">First</a></li>
                       <% } %> 
-                    <% } else { %> 
-                      <li class="page-item"><a href="/lists?perPage=<%= limit %>&page=<%= i %>" class="page-link"><%= i %> </a></li>
-                    <% } %> 
                   <% } %>
-                  <% if (i == Number(current) + 4 && i < pages) { %>
+                  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                  <% if (i !== 1) { %>
                       <li class="disabled page-item"><a class="page-link">...</a></li>
                   <% } %>
-              <% } %>
-              <% if (current == pages) { %>
-                <li class="disabled page-item"><a class="page-link">Last</a></li>
-              <% } else { %>
-                  <% if (query.list !== undefined) { %> 
-                    <li class="page-item"><a class="page-link" href="/lists?perPage=<%= limit %>&page=<%= pages %>&list%5Bpromo1%5D=<%= query.list.promo1 %>&list%5Bpromo2%5D=<%= query.list.promo2 %>&list%5Bpromo3%5D=<%= query.list.promo3 %>&list%5Bremark%5D=<%= query.list.remark %>&list%5Brating%5D=<%= query.list.rating %>">Last</a></li>
-                  <% } else { %> 
-                    <li class="page-item"><a class="page-link" href="/lists?perPage=<%= limit %>&page=<%= pages %>">Last</a></li>
-                  <% } %> 
-              <% } %>
-          </ul>
-      <% } %>
+                  <% for (i; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                      <% if (i == current) { %>
+                          <li class="page-item active"><a class="page-link"><%= i %></a></li>
+                      <% } else { %>
+                        <% if (query.list !== undefined) {  %> 
+                          <% if ((query.list.rating === '') && (query.list.promo1 === '' && query.list.promo2 === '' && query.list.promo3 === '' && query.list.remark === '')) { %>
+                            <li class="page-item"><a href="/lists?page=<%= i %>" class="page-link"><%= i %> </a></li>
+                          <% } else if ((query.list.rating === '') && (query.list.promo1 !== '' || query.list.promo2 !== '' || query.list.promo3 !== '' || query.list.remark !== '')) { %> 
+                            <li class="page-item"><a class="page-link" href="/lists?page=<%= i %>&list%5Bpromo1%5D=<%= query.list.promo1 %>&list%5Bpromo2%5D=<%= query.list.promo2 %>&list%5Bpromo3%5D=<%= query.list.promo3 %>&list%5Bremark%5D=<%= query.list.remark %>&list%5Brating%5D=<%= query.list.rating %>"><%= i %></a></li>
+                          <% } else { %> 
+                            <li class="page-item"><a class="page-link" href="/lists?page=<%= i %>&list%5Bpromo1%5D=<%= query.list.promo1 %>&list%5Bpromo2%5D=<%= query.list.promo2 %>&list%5Bpromo3%5D=<%= query.list.promo3 %>&list%5Bremark%5D=<%= query.list.remark %>&list%5Brating%5D=<%= query.list.rating %>"><%= i %></a></li>
+                          <% } %> 
+                        <% } else { %> 
+                          <li class="page-item"><a href="/lists?perPage=<%= limit %>&page=<%= i %>" class="page-link"><%= i %> </a></li>
+                        <% } %> 
+                      <% } %>
+                      <% if (i == Number(current) + 4 && i < pages) { %>
+                          <li class="disabled page-item"><a class="page-link">...</a></li>
+                      <% } %>
+                  <% } %>
+                  <% if (current == pages) { %>
+                    <li class="disabled page-item"><a class="page-link">Last</a></li>
+                  <% } else { %>
+                      <% if (query.list !== undefined) { %> 
+                        <li class="page-item"><a class="page-link" href="/lists?perPage=<%= limit %>&page=<%= pages %>&list%5Bpromo1%5D=<%= query.list.promo1 %>&list%5Bpromo2%5D=<%= query.list.promo2 %>&list%5Bpromo3%5D=<%= query.list.promo3 %>&list%5Bremark%5D=<%= query.list.remark %>&list%5Brating%5D=<%= query.list.rating %>">Last</a></li>
+                      <% } else { %> 
+                        <li class="page-item"><a class="page-link" href="/lists?perPage=<%= limit %>&page=<%= pages %>">Last</a></li>
+                      <% } %> 
+                  <% } %>
+              </ul>
+          <% } %>
+        <% } %> 
       <!-- END OF PAGINATION -->
 
       </div>
