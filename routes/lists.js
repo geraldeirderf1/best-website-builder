@@ -14,7 +14,7 @@ const upload = multer({ storage });
 
 router.route('/')
     // INDEX
-    .get(catchAsync(lists.index))
+    .get(isLoggedIn, catchAsync(lists.index))
     // CREATE
     .post(isLoggedIn, upload.array('list[logo]'), validateList, catchAsync(lists.createList));
 

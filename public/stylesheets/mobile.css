@@ -26,6 +26,7 @@
   #list .container .list-content{
     padding: 0;
     width: auto;
+    min-width: 100%;
   }
 
   #list .container .list-content .row {

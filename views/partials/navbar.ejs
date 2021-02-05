@@ -12,12 +12,11 @@
                 <div>
                     <div>
                         <ul>
-                            <li><a class="active" href="/">Home</a></li>
-                            <li><a href="/lists">Manage</a></li>
                             <% if(!currentUser) { %> 
                             <li><a href="/login">Login</i></a></li>
                             <li><a href="/register">Signup</i></a></li>
                             <% } else { %> 
+                            <li><a href="/lists">Manage</a></li>
                             <li><a href="/logout">Logout</i></a></li>
                             <% } %> 
                             <!-- <li class="nested">Charts <i class="fas fa-angle-down"></i>

@@ -19,7 +19,7 @@ const express = require('express'),
     Review = require('./models/review'),
     {listSchema, reviewSchema} = require('./schemas'),
     ExpressError = require('./utils/ExpressError'),
-    MongoDBStore = require('connect-mongo')(session);
+    MongoDBStore = require('connect-mongo')(session),
     port = process.env.PORT || 3000;
 
 
@@ -37,12 +37,6 @@ mongoose.connect(dbUrl, {
     useUnifiedTopology: true,
     useFindAndModify: false
 });
-
-// const db = mongoose.connection;
-// db.on("error", console.error.bind(console, "connection error:"));
-// db.once("open", () => {
-//     console.log("Database connected");
-// });
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -91,7 +85,7 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
-    res.locals.page = 'other';
+    res.locals.pageName = 'other';
 
     next();
 });
@@ -100,22 +94,51 @@ app.use('/lists', listRoutes);
 app.use('/lists/:id', reviewRoutes);
 app.use('/', userRoutes);
 
-
 // ========================
 // RESTFUL ROUTES
 // ========================
 
 // HOMEPAGE
 app.get('/', catchAsync(async (req, res, next) => {
-    if (req.query.promo1) {
-        const regex = new RegExp(escapeRegex(req.query.promo1), 'gi');
-        // const regex = new RegExp(escapeRegex(req.query.rating), 'gi');
-        const lists = await List.find({promo1: regex});
-        res.render('index', { lists, page: 'index' });
+
+    if (isEmpty(req.query)) {
+        var perPage = 5;
     } else {
-        const lists = await List.find({});
-        res.render('index', { lists, page: 'index' });
+      if (req.query.perPage !== undefined) {
+        var perPage = parseInt(req.query.perPage);
+      } else {
+        var perPage = 5;
+      }
     }
+    const page = req.query.page || 1;
+
+    try {
+        // execute query with page and limit values
+        const lists = await List.find({})
+          .skip((perPage * page) - perPage)
+          .limit(perPage)
+          .populate('author')
+          .exec();
+    
+        // get total documents in the Posts collection 
+        const count = await List.countDocuments();
+
+        res.render('index', {
+          query: req.query,
+          limit: perPage,
+          lists: lists,
+          current: page,
+          count,
+          pages: Math.ceil(count / perPage),
+          pageName: 'index'
+        });
+  
+  
+      } catch (err) {
+        console.error(err.message);
+      }
+    // const lists = await List.find({});
+    // res.render('index', { lists, page: 'index' });
 }));
 
 app.all('*', (req, res, next) => {
@@ -124,7 +147,7 @@ app.all('*', (req, res, next) => {
 
 // BASIC ERROR HANDLING
 app.use((err, req, res, next) => {
-    res.locals.page = 'other';
+    res.locals.pageName = 'other';
     const { statusCode = 500 } = err;
     if(!err.message) {
         err.message = 'Oh No, Something Went Wrong!';
@@ -134,8 +157,15 @@ app.use((err, req, res, next) => {
 
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-    // return rating.replace(/(^[0-9][0-9])\.?([0-9][0-9])?$/g, `${rating}`);
 };
+
+function isEmpty(obj) {
+    for(let key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+  }
 
 
 app.listen(port, () => console.log(`Sever started on port ${port}`));

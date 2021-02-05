@@ -7,10 +7,10 @@
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <% if (typeof page !== undefined && page === 'show' ) { %>
+    <% if (typeof pageName !== undefined && pageName === 'show' ) { %>
         <link rel="stylesheet" href="/stylesheets/stars.css">
     <% } %> 
-    <% if (typeof page !== undefined && page === 'editReview' ) { %>
+    <% if (typeof pageName !== undefined && pageName === 'editReview' ) { %>
       <link rel="stylesheet" href="/stylesheets/stars.css">
     <% } %>
     <link rel="stylesheet" href="/stylesheets/style.css">
@@ -23,7 +23,7 @@
     <header>
         <%- include('../partials/navbar') %>
 
-            <% if (typeof page !==undefined && page==='index' ) { %>
+            <% if (typeof pageName !== undefined && pageName ==='index' ) { %>
                 <div id="showcase">
                     <div class="container">
                         <div class="showcase-content">

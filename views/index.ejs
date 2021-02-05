@@ -17,6 +17,27 @@
       <div class="container">
         <div class="list-content">
 
+        <!-- PAGINATION SHOW OPTION -->
+        <% if (count > 5) { %> 
+          <% if (pages > 0) { %>
+            <ul class="pagination pagination-homepage text-center">
+              <div class="show-input-group">
+                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                  <form id="show-pagination-form" action="/" method="GET">
+                    <select class="form-select" name="perPage" id="limit" aria-label="Example select with button addon">
+                      <option value="<%= limit %>" selected>Show...</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                    <button type="submit" class="show-btn btn-outline-secondary">OK</button>
+                  </form>
+              </div>
+            </ul>
+          <% } %> 
+        <% } %> 
+        <!-- END OF PAGINATION SHOW OPTION -->
+
           <% for (let list of lists) { %>
           <div class="row">
             <div class="list-details">
@@ -65,6 +86,39 @@
             </div>
           </div>
           <% } %>
+
+        <!-- PAGINATION -->
+        <% if (count > 5) { %> 
+            <% if (pages > 0) { %>
+              <ul class="pagination pagination-homepage text-center">
+                  <% if (current == 1) { %>
+                      <li class="disabled page-item"><a class="page-link">First</a></li>
+                  <% } else { %>
+                      <li class="page-item"><a class="page-link" href="/?page=1&perPage=<%= limit %>">First</a></li>
+                  <% } %>
+                  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                  <% if (i !== 1) { %>
+                      <li class="disabled page-item"><a class="page-link">...</a></li>
+                  <% } %>
+                  <% for (i; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                      <% if (i == current) { %>
+                          <li class="page-item active"><a class="page-link"><%= i %></a></li>
+                      <% } else { %>
+                        <li class="page-item"><a href="/?perPage=<%= limit %>&page=<%= i %>" class="page-link"><%= i %> </a></li>
+                      <% } %>
+                      <% if (i == Number(current) + 4 && i < pages) { %>
+                          <li class="disabled page-item"><a class="page-link">...</a></li>
+                      <% } %>
+                  <% } %>
+                  <% if (current == pages) { %>
+                    <li class="disabled page-item"><a class="page-link">Last</a></li>
+                  <% } else { %>
+                    <li class="page-item"><a class="page-link" href="/?perPage=<%= limit %>&page=<%= pages %>">Last</a></li>
+                  <% } %>
+              </ul>
+          <% } %>
+        <% } %> 
+      <!-- END OF PAGINATION -->
 
         </div>
         <aside>
